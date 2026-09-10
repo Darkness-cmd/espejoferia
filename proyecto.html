@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraMirror | Estética & Funcionalidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fcf9f5;
+            --surface: #ffffff;
+            --surface-card: #fffbf7;
+            --primary: #d49a6a;        /* Tono madera / acento cálido */
+            --accent-pink: #f7c5cc;    /* Rosado suave pastel */
+            --accent-yellow: #fce8b2;  /* Amarillo suave pastel */
+            --text-main: #3d3a38;
+            --text-muted: #7a736f;
+            --border: #f0e6de;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(252, 249, 245, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: #d88392; /* Rosado más visible para el punto */
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: #d88392;
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px 20px;
+            background: radial-gradient(circle at 50% 20%, rgba(247, 197, 204, 0.25) 0%, rgba(252, 232, 178, 0.15) 50%, transparent 80%);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            background: linear-gradient(135deg, rgba(247, 197, 204, 0.4), rgba(252, 232, 178, 0.4));
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: #b56b78;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            line-height: 1.15;
+            color: #2c2927;
+        }
+
+        header h1 span {
+            background: linear-gradient(135deg, #d88392 20%, #e0a368 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f7c5cc, #f3b1bc);
+            color: #5c353d;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(247, 197, 204, 0.4);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(247, 197, 204, 0.6);
+            background: linear-gradient(135deg, #f3b1bc, #eba0ad);
+        }
+
+        /* --- SECCIONES GENERALES --- */
+        section {
+            padding: 100px 8%;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 15px;
+            color: #2c2927;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- CARRUSEL TIPO PROYECCIÓN EDITORIAL --- */
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(212, 154, 106, 0.08);
+        }
+
+        .carousel-slide {
+            display: none;
+            position: relative;
+            text-align: center;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            cursor: zoom-in;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide img:hover {
+            transform: scale(1.02);
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7), transparent);
+            padding: 30px 20px 20px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #b56b78;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            color: #b56b78;
+            border: 1px solid var(--border);
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 50%;
+            transition: var(--transition);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .carousel-btn:hover {
+            background-color: #f7c5cc;
+            color: #5c353d;
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+
+        .carousel-dots {
+            text-align: center;
+            padding: 20px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .dot {
+            display: inline-block;
+            height: 6px;
+            width: 24px;
+            margin: 0 4px;
+            background-color: #e8dbd1;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active, .dot:hover {
+            background-color: #d88392;
+            width: 36px;
+        }
+
+        /* --- LIGHTBOX PANTALLA COMPLETA --- */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(61, 58, 56, 0.85);
+            backdrop-filter: blur(16px);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-modal img {
+            max-width: 85%;
+            max-height: 75vh;
+            border-radius: 16px;
+            border: 2px solid var(--accent-pink);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+
+        .lightbox-caption {
+            color: #fff;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent-pink);
+        }
+
+        /* --- GRID DE CARACTERÍSTICAS --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(212, 154, 106, 0.03);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 20px 40px rgba(247, 197, 204, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(247, 197, 204, 0.3), rgba(252, 232, 178, 0.3));
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #2c2927;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* --- CTA FINAL --- */
+        .cta-container {
+            background: linear-gradient(145deg, rgba(247, 197, 204, 0.15) 0%, rgba(252, 232, 178, 0.2) 100%);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(212, 154, 106, 0.05);
+        }
+
+        .cta-container h2 {
+            font-size: clamp(2rem, 3vw, 2.8rem);
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #2c2927;
+        }
+
+        .cta-container p {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 35px auto;
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 300;
+            background-color: var(--surface);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 70px 5%; }
+            .carousel-slide img { height: 320px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <div class="logo">AURA<span>.</span></div>
+        <a href="#contacto" class="nav-link">Apartar unidad</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header>
+        <span class="badge">Feria Empresarial CASD</span>
+        <h1>Ilumina tu rutina con <span>estilo y frescura.</span></h1>
+        <p>Un espejo de diseño minimalista con estructura en madera noble, ventilación integrada y power bank interna. Creado especialmente para tu tocador.</p>
+        <a href="#proyeccion" class="btn">Explorar Proyecto ↓</a>
+    </header>
+
+    <!-- SECCIÓN DE PROYECCIÓN / CARRUSEL -->
+    <section id="proyeccion">
+        <div class="section-header">
+            <h2>Galería Interactiva</h2>
+            <p>Desliza o deja que la proyección automática revele cada detalle. Haz clic en la foto para ampliarla.</p>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80" alt="Estructura de madera" onclick="openLightbox(this)">
+                <div class="carousel-caption">🪵 Estructura en madera pulida de alta gama</div>
+            </div>
+
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80" alt="Rutina de belleza" onclick="openLightbox(this)">
+                <div class="carousel-caption">✨ Precisión y confort para tu rutina diaria</div>
+            </div>
+
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80" alt="Detalle técnico" onclick="openLightbox(this)">
+                <div class="carousel-caption">🔋 Autonomía total con power bank interna oculta</div>
+            </div>
+
+            <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
+
+            <div class="carousel-dots">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX PANTALLA COMPLETA -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightboxImg">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+    <!-- CARACTERÍSTICAS -->
+    <section>
+        <div class="section-header">
+            <h2>Diseñado con Propósito</h2>
+            <p>Cada componente responde a una necesidad estética y funcional.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🪵</div>
+                <h3>Madera Artesanal</h3>
+                <p>Estructura sólida con acabados cálidos que aportan una presencia elegante a cualquier espacio de maquillaje.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔋</div>
+                <h3>Power Bank Interna</h3>
+                <p>Sistema completamente autónomo. Olvídate de los cables molestos cruzando por todo tu tocador.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💨</div>
+                <h3>Ventilación Sutil</h3>
+                <p>Flujo de aire silencioso y estratégico, pensado para mantenerte impecable y fresca en climas cálidos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CONTACTO -->
+    <section id="contacto">
+        <div class="cta-container">
+            <h2>¿Lista para tener el tuyo?</h2>
+            <p>Aparta tu unidad para la feria empresarial o escríbenos para conocer más detalles sobre el diseño.</p>
+            <a href="https://wa.me/tu_numero_de_whatsapp" class="btn" target="_blank">Contactar por WhatsApp ↗</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>AuraMirror • Proyecto Feria Empresarial CASD • Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT DE INTERACTIVIDAD -->
+    <script>
+        let slideIndex = 1;
+        let slideTimer;
+
+        showSlides(slideIndex);
+        startAutoSlide();
+
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            showSlides(slideIndex += n);
+            startAutoSlide();
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            showSlides(slideIndex = n);
+            startAutoSlide();
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            
+            slides[slideIndex - 1].classList.add("active");
+            dots[slideIndex - 1].classList.add("active");
+        }
+
+        function startAutoSlide() {
+            slideTimer = setTimeout(function() {
+                slideIndex++;
+                showSlides(slideIndex);
+                startAutoSlide();
+            }, 4500);
+        }
+
+        function openLightbox(imgElement) {
+            clearTimeout(slideTimer);
+            const modal = document.getElementById("lightboxModal");
+            const modalImg = document.getElementById("lightboxImg");
+            const captionText = document.getElementById("lightboxCaption");
+            
+            modal.style.display = "flex";
+            modalImg.src = imgElement.src;
+            captionText.innerText = imgElement.nextElementSibling.innerText;
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById("lightboxModal");
+            modal.style.display = "none";
+            startAutoSlide();
+        }
+    </script>
+
+</body>
+</html>
