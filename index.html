@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Pastel Optimizada */
             --bg: #fbf4f6; 
             --surface: #ffffff;
             --surface-card: #ffffff;
@@ -33,7 +32,6 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
-            /* Fondo ambiental ligero usando gradientes estáticos */
             background-image: 
                 radial-gradient(circle at 10% 10%, rgba(244, 194, 201, 0.35) 0%, transparent 40%),
                 radial-gradient(circle at 90% 50%, rgba(250, 227, 179, 0.3) 0%, transparent 40%);
@@ -43,7 +41,6 @@
             line-height: 1.6;
         }
 
-        /* SCROLLBAR */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -58,7 +55,6 @@
             background: #d87082;
         }
 
-        /* REVELADO AL SCROLL OPTIMIZADO */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -116,7 +112,6 @@
             background-color: var(--border);
         }
 
-        /* LOGO SUPERIOR DESTACADO */
         .logo {
             font-weight: 800;
             font-size: 1.35rem;
@@ -153,7 +148,7 @@
             transform: translateY(-1px);
         }
 
-        /* HERO SECTION */
+        /* HERO */
         header {
             min-height: 85vh;
             display: flex;
@@ -441,7 +436,7 @@
             font-weight: 400;
         }
 
-        /* SECCIONES ESTANDARTE & FERIA */
+        /* ESTANDARTE & FERIA */
         .banner-container {
             background: #ffffff;
             border: 1px solid var(--border);
@@ -507,7 +502,6 @@
             height: 44px;
         }
 
-        /* AJUSTE PARA IMÁGENES EN LAS TARJETAS DE LA FERIA */
         .fair-card .icon img {
             width: 40px;
             height: 40px;
@@ -527,7 +521,7 @@
             color: var(--text-muted);
         }
 
-        /* CTA FINAL */
+        /* CTA */
         .cta-container {
             background: linear-gradient(135deg, rgba(244, 194, 201, 0.3) 0%, rgba(250, 227, 179, 0.35) 100%);
             border: 1px solid var(--border);
@@ -549,7 +543,6 @@
             margin: 0 auto 30px auto;
         }
 
-        /* FOOTER */
         footer {
             border-top: 1px solid var(--border);
             padding: 30px 8%;
@@ -573,7 +566,6 @@
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
     <nav>
         <div class="brand-container">
             <a href="#" class="school-badge-slot" title="Institución Educativa CASD">
@@ -588,7 +580,6 @@
         <a href="#contacto" class="nav-link">Apartar unidad</a>
     </nav>
 
-    <!-- HERO SECTION -->
     <header>
         <div class="badge">
             🎓 Feria Empresarial CASD
@@ -600,7 +591,6 @@
         </div>
     </header>
 
-    <!-- GALERÍA / CARRUSEL -->
     <section id="proyeccion" class="reveal">
         <div class="section-header">
             <h2>Galería Interactiva</h2>
@@ -634,18 +624,16 @@
         </div>
     </section>
 
-    <!-- LIGHTBOX -->
     <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <img id="lightboxImg" alt="Vista previa">
         <div id="lightboxCaption" class="lightbox-caption"></div>
     </div>
 
-    <!-- CARACTERÍSTICAS -->
     <section class="reveal">
         <div class="section-header">
-            <h2>Diseñado con Propósito</h2>
-            <p>Cada componente responde a una necesidad estética y funcional.</p>
+            <h2>Características del Espejo</h2>
+            <p>Detalles principales de nuestro prototipo.</p>
         </div>
 
         <div class="features-grid">
@@ -667,7 +655,6 @@
         </div>
     </section>
 
-    <!-- SECCIÓN ESTANDARTE & STICKER -->
     <section id="estandarte" class="reveal">
         <div class="section-header">
             <h2>Estandarte & Identidad</h2>
@@ -676,7 +663,7 @@
 
         <div class="banner-container">
             <div class="banner-img-wrapper">
-                <img src="img/sticker.png" alt="Sticker Estandarte del Proyecto" class="banner-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80'">
+                <img src="img/sticker.png" alt="Sticker Estandarte del Proyecto" class="banner-img">
             </div>
             <div class="banner-info">
                 <div class="badge">🎨 Arte & Sticker Oficial</div>
@@ -689,7 +676,6 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DETALLES DE LA FERIA -->
     <section id="feria" class="reveal">
         <div class="section-header">
             <h2>Detalles de la Feria Empresarial</h2>
@@ -723,7 +709,6 @@
         </div>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contacto" class="reveal">
         <div class="cta-container">
             <h2>¿Lista para tener el tuyo?</h2>
@@ -732,14 +717,11 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <p>AuraMirror • Proyecto Feria Empresarial CASD • Todos los derechos reservados.</p>
     </footer>
 
-    <!-- SCRIPT DE INTERACTIVIDAD -->
     <script>
-        // IntersectionObserver eficiente para revelar elementos
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -751,7 +733,6 @@
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // Lógica del carrusel
         let slideIndex = 1;
         let slideTimer;
 
@@ -796,7 +777,6 @@
             }, 4500);
         }
 
-        // Lightbox
         function openLightbox(imgElement) {
             clearTimeout(slideTimer);
             const modal = document.getElementById("lightboxModal");
